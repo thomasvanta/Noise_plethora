@@ -38,7 +38,7 @@ public:
     //waveform1.frequency(20+(pitch1*1000));
     //waveform1.begin(waveForm);
 
-    SampleTextureIntoLut(k1 * 0.5, k2 * 0.5);
+    SampleTextureIntoLut((int)(k1 * 0.5), (int)(k2 * 0.5));
     waveformMod1.arbitraryWaveform(PerlinLut, 172.0);
   }
 
