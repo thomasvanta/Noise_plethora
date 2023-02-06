@@ -1,15 +1,15 @@
 # Noise Plethora Firmware v1.5
 
-Tennsyduino >= V1.55 is neceesary
 
-To update Firmware we recommend to use Hex file provided in Releases page. For the brave that will compile the code, keep reading.
+To update the Firmware we recommend using the Hex file provided in Releases page.
+For the brave that will compile the code, keep reading.
 
-Dependencies:
+Dependencies (already in lib folder):
 - ADC (https://github.com/pedvide/ADC/releases)
 - QuadEncoder (https://github.com/mjs513/Teensy-4.x-Quad-Encoder-Library)
 - SevSeg (https://github.com/DeanIsMe/SevSeg)
 
-To make things work You'll need to replace some files in the Teensy distribution. The files and a quick guide can be found in the 'teensy' folder in this repository.
+Use VSCode and PlatformIO to Build and Upload the firmware.
 
 Copyright (c) 2021 Befaco / Jeremy Bernstein
 Open-source software
