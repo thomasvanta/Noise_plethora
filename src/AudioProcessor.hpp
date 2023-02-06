@@ -43,10 +43,10 @@ class AudioProcessor {
 public:
 
   AudioProcessor()
-    : chanA{ampA, 0, usb1, 0}
-    , chanB{ampB, 0, usb1, 1}
-    , chanC{ampA, 0, i2s1, 0}
-    , chanD{ampB, 0, i2s1, 1}
+    : chanA{ampA, 0, i2s1, 0}
+    , chanB{ampB, 0, i2s1, 1}
+    , chanC{ampA, 0, usb1, 0}
+    , chanD{ampB, 0, usb1, 1}
     
   {};
 
@@ -103,7 +103,8 @@ private:
 
   AudioConnection                   chanC; //usb Audio
   AudioConnection                   chanD;
-  AudioOutputUSB usb1; // xy=785,352
+  AudioOutputUSB                    usb1; // xy=785,352
+  AudioInputAnalog                  adc1; // xy=457,440
 
   std::unique_ptr<PluginConnection> currentPluginA;
   std::unique_ptr<PluginConnection> currentPluginB;
