@@ -84,6 +84,12 @@ int Bank::getSize() {
 #include "P_Rwalk_BitCrushPW.hpp"
 #include "P_Rwalk_LFree.hpp"
 
+//Bank D:
+#include "P_Perlin.hpp"
+#include "P_PerlinFreqMod.hpp"
+#include "P_PerlinSimple.hpp"
+#include "P_Rwalk_SineFMFlange.hpp"
+
 //Maybe Later: (Unused or incomplet)
 
 #include "P_Rwalk_SineFM.hpp"
@@ -109,10 +115,9 @@ static std::array<Bank, numBanks> banks { bank1, bank2, bank3, bank4, bank5 };
 // static const Bank bank8 BANKS_DEF_8;
 // static const Bank bank9 BANKS_DEF_9;
 // static const Bank bank10 BANKS_DEF_10;
-// static std::array<Bank, programsPerBank> banks { bank1, bank2, bank3, bank4, bank5, bank6, bank7, bank8, bank9, bank10 };
 
 Bank& getBankForIndex(int i) {
   if (i < 0) i = 0;
-  if (i >= programsPerBank) i = (programsPerBank - 1);
+  if (i >= numBanks) i = (numBanks - 1);
   return banks[i];
 }

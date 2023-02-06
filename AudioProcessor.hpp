@@ -43,8 +43,11 @@ class AudioProcessor {
 public:
 
   AudioProcessor()
-    : chanA{ampA, 0, i2s1, 0}
-    , chanB{ampB, 0, i2s1, 1}
+    : chanA{ampA, 0, usb1, 0}
+    , chanB{ampB, 0, usb1, 1}
+    , chanC{ampA, 0, i2s1, 0}
+    , chanD{ampB, 0, i2s1, 1}
+    
   {};
 
   ~AudioProcessor() {};
@@ -98,7 +101,20 @@ private:
   AudioConnection                   chanA;
   AudioConnection                   chanB;
 
+  AudioConnection                   chanC; //usb Audio
+  AudioConnection                   chanD;
+  AudioOutputUSB usb1; // xy=785,352
+
   std::unique_ptr<PluginConnection> currentPluginA;
   std::unique_ptr<PluginConnection> currentPluginB;
 
 };
+
+
+// GUItool: begin automatically generated code
+//AudioSynthWaveform waveform1;             // xy=249,346
+//AudioSynthWaveformModulated waveformMod1; // xy=511,353
+//AudioConnection patchCord1(waveform1, 0, waveformMod1, 0);
+//AudioConnection patchCord2(waveformMod1, 0, usb1, 0);
+//AudioConnection patchCord3(waveformMod1, 0, usb1, 1);
+// GUItool: end automatically generated code

@@ -9,22 +9,25 @@
 #include "NoisePlethora.hpp"
 #include "perlin.h"
 
-class Perlin : public Plugin {
+class PerlinFreqMod : public Plugin
+{
 
 public:
-  Perlin()
+  PerlinFreqMod()
       : patchCord1(waveform1, 0, waveformMod1, 0)
   {}
 
-  ~Perlin() override {}
+  ~PerlinFreqMod() override {}
 
-  Perlin(const Perlin&) = delete;
-  Perlin& operator=(const Perlin&) = delete;
+  PerlinFreqMod(const PerlinFreqMod &) = delete;
+  PerlinFreqMod &operator=(const PerlinFreqMod &) = delete;
 
   void init() override {
 
-    GenerateTexture(100);
-    SampleTextureIntoLut();
+    for (int i = 0; i < 256; i++)
+    {
+      PerlinLut[i] = perlin1d(i, 51, 4) * 32000;
+    }
 
     waveformMod1.arbitraryWaveform(PerlinLut, 17200.0);
     waveformMod1.begin(1, 100, WAVEFORM_ARBITRARY);
@@ -34,22 +37,17 @@ public:
 
   void process(float k1, float k2) override {
 
-    //float pitch1 = pow(k_1, 2);
-    //waveform1.frequency(20+(pitch1*1000));
-    //waveform1.begin(waveForm);
+    waveform1.frequency(50 + k2 * 400);
 
-    SampleTextureIntoLut((int)0, (int)k2 * textureSize);
     waveformMod1.arbitraryWaveform(PerlinLut, 17200.0);
     //waveform1.begin(1, k1 * 15600, WAVEFORM_ARBITRARY);
-    waveformMod1.frequency(25 + k1 * 15600);
+    waveformMod1.frequency(k1 * 15600);
   }
 
   AudioStream &getStream() override { return waveformMod1; }
   unsigned char getPort() override { return 0; }
 
 private:
-
-  int waveForm;
 
   // GUItool: begin automatically generated code
   AudioSynthWaveform waveform1;             // xy=305.3333282470703,648.3333358764648
@@ -58,25 +56,7 @@ private:
 
   static const int textureSize = 256;
   int16_t PerlinLut[256]; //lut size is given by the audio library
-  int16_t PerlinTexture[textureSize][textureSize];
-
-  void GenerateTexture(float freq, int depth = 4 ){
-    for (int x = 0; x < textureSize; x++)
-    {
-      for (int y = 0; y < textureSize; y++)
-      {
-        PerlinTexture[x][y] = perlin2d(x, y, freq, depth) * 32000;
-      }
-    }
-  }
-
-  void SampleTextureIntoLut(int x = 0, int y = 0){
-    for (int i = 0; i < 256; i++)
-    {
-      PerlinLut[i] = PerlinTexture[(x+i) % textureSize][y % textureSize];
-    }
-  }
 
 };
 
-REGISTER_PLUGIN(Perlin);
+REGISTER_PLUGIN(PerlinFreqMod);

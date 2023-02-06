@@ -64,6 +64,12 @@ ProgramSelector program;
 long last_pA = 512;
 long last_pB = 512;
 
+const long midiBaseCC = 10;
+long Mid01 = 0;
+long Mid02 = 0;
+long Mid03 = 0;
+long Mid04 = 0;
+
 // using ADC lib for better control
 #include <ADC.h>
 #include <ADC_util.h>
@@ -205,6 +211,9 @@ void setup() {
   processor.setB(pinB, gainB);
 
   displayTimer.begin(loopDisplay, 500);
+
+  //USB MIDI
+  usbMIDI.setHandleControlChange(midiControlChange);
 }
 
 long progA_last = 0;
@@ -228,10 +237,18 @@ void loop() {
   handleStartup(ms); // deal with CV mode change/display
 
   // Read CV and knobs,sum them and scale to 0-1.0
-  float knob_1 = (float)1.0 - adc->analogRead(A10) / 1023.0;
-  float knob_2 = (float)1.0 - adc->analogRead(A11) / 1023.0;
-  float knob_3 = (float)1.0 - adc->analogRead(A12) / 1023.0;
-  float knob_4 = (float)1.0 - adc->analogRead(A13) / 1023.0;
+  //float knob_1 = (float)1.0 - adc->analogRead(A10) / 1023.0;
+  //float knob_2 = (float)1.0 - adc->analogRead(A11) / 1023.0;
+  //float knob_3 = (float)1.0 - adc->analogRead(A12) / 1023.0;
+  //float knob_4 = (float)1.0 - adc->analogRead(A13) / 1023.0;
+
+  usbMIDI.read();
+
+  // Read CV and knobs,sum them and scale to 0-1.0
+  float knob_1 = (float)((1.0 - adc->analogRead(A10) / 1023.0) + Mid01);
+  float knob_2 = (float)((1.0 - adc->analogRead(A11) / 1023.0) + Mid02);
+  float knob_3 = (float)((1.0 - adc->analogRead(A12) / 1023.0) + Mid03);
+  float knob_4 = (float)((1.0 - adc->analogRead(A13) / 1023.0) + Mid04);
 
   bool checkCVA = false, checkCVB = false;
 
@@ -725,4 +742,38 @@ void handleCV(CVModData& data) {
 
 void loopDisplay() {
   sevseg.refreshDisplay();
+}
+
+void midiControlChange(byte channel, byte control, byte value)
+{
+  switch (channel)
+  {
+    
+  case 1:
+    switch (control)
+    {
+    case midiBaseCC:
+      Mid01 = value / 127;
+      break;
+    case midiBaseCC + 1:
+      Mid02 = value / 127;
+      break;
+    case midiBaseCC + 2:
+      Mid03 = value / 127;
+      break;
+    case midiBaseCC + 3:
+      Mid04 = value / 127;
+      break;
+
+    default:
+      break;
+    }
+
+
+    break;
+  
+  default:
+    break;
+  }
+  //usbMIDI.sendControlChange(control + 1, value, channel);
 }

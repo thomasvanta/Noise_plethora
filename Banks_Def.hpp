@@ -45,7 +45,20 @@
   { "Rwalk_LFree", 1.0 } \
 }
 
-#define BANKS_DEF_4
+#define BANKS_DEF_4 { \
+  { "Perlin", 1.0 }, \
+  { "PerlinFreqMod", 1.0 }, \
+  { "PerlinSimple", 1.0 }, \
+  { "Rwalk_SineFM", 1.0 }, \
+  { "Rwalk_SineFMFlange", 1.0 }, \
+  { "VarWave", 1.0 }, \
+  { "arrayOnTheRocks", 1.0 }, \
+  { "TestPlugin", 1.0 }, \
+  { "TestPlugin", 1.0 }, \
+  { "TestPlugin", 1.0 } \
+}
+
+
 #define BANKS_DEF_5
 
 // #define BANKS_DEF_6
