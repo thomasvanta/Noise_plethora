@@ -9,19 +9,19 @@
 #include "NoisePlethora.hpp"
 #include "perlin.h"
 
-class PerlinFreqMod : public Plugin
+class VidPerlinFreqMod : public Plugin
 {
 
 public:
-  PerlinFreqMod()
+  VidPerlinFreqMod()
       : patchCord1(waveform2, 0, multiply1, 1),
       patchCord2(waveform1, 0, multiply1, 0)
   {}
 
-  ~PerlinFreqMod() override {}
+  ~VidPerlinFreqMod() override {}
 
-  PerlinFreqMod(const PerlinFreqMod &) = delete;
-  PerlinFreqMod &operator=(const PerlinFreqMod &) = delete;
+  VidPerlinFreqMod(const VidPerlinFreqMod &) = delete;
+  VidPerlinFreqMod &operator=(const VidPerlinFreqMod &) = delete;
 
   void init() override {
 
@@ -63,4 +63,4 @@ private:
 
 };
 
-REGISTER_PLUGIN(PerlinFreqMod);
+REGISTER_PLUGIN(VidPerlinFreqMod);

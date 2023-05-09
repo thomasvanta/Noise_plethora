@@ -9,27 +9,27 @@
 #include "NoisePlethora.hpp"
 #include "perlin.h"
 
-class Perlin : public Plugin {
+class VidPerlin : public Plugin {
 
 public:
-  Perlin()
+  VidPerlin()
       : patchCord1(waveform1, 0, waveformMod1, 0)
   {}
 
-  ~Perlin() override {}
+  ~VidPerlin() override {}
 
-  Perlin(const Perlin&) = delete;
-  Perlin& operator=(const Perlin&) = delete;
+  VidPerlin(const VidPerlin&) = delete;
+  VidPerlin& operator=(const VidPerlin&) = delete;
 
   void init() override {
 
-    GenerateTexture(100);
+    GenerateTexture(0.1);
     SampleTextureIntoLut();
 
-    waveformMod1.arbitraryWaveform(PerlinLut, 17200.0);
-    waveformMod1.begin(1, 100, WAVEFORM_ARBITRARY);
+    waveformMod1.arbitraryWaveform(PerlinLut, 172.0);
+    waveformMod1.begin(1, 50, WAVEFORM_ARBITRARY);
     //waveformMod1.phaseModulation(180);
-    waveform1.begin(1, 50, WAVEFORM_SAWTOOTH);
+    waveform1.begin(1, 50, WAVEFORM_SINE);
   }
 
   void process(float k1, float k2) override {
@@ -38,10 +38,10 @@ public:
     //waveform1.frequency(20+(pitch1*1000));
     //waveform1.begin(waveForm);
 
-    SampleTextureIntoLut((int)0, (int)k2 * textureSize);
-    waveformMod1.arbitraryWaveform(PerlinLut, 17200.0);
+    SampleTextureIntoLut((int)k2 * textureSize, (int)k2 * textureSize);
+    waveformMod1.arbitraryWaveform(PerlinLut, 172.0);
     //waveform1.begin(1, k1 * 15600, WAVEFORM_ARBITRARY);
-    waveformMod1.frequency(25 + k1 * 15600);
+    waveformMod1.frequency(25 + k1 * 75);
   }
 
   AudioStream &getStream() override { return waveformMod1; }
@@ -79,4 +79,4 @@ private:
 
 };
 
-REGISTER_PLUGIN(Perlin);
+REGISTER_PLUGIN(VidPerlin);

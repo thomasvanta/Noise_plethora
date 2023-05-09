@@ -85,9 +85,12 @@ int Bank::getSize() {
 #include "P_Rwalk_LFree.hpp"
 
 //Bank D:
-#include "P_Perlin.hpp"
-#include "P_PerlinFreqMod.hpp"
-#include "P_PerlinSimple.hpp"
+#include "P_Vid_Perlin.hpp"
+#include "P_Vid_PerlinFreqMod.hpp"
+#include "P_Vid_SimplePerlin.hpp"
+#include "P_Vid_simpleLFO.hpp"
+#include "P_Vid_VerticalRamp.hpp"
+#include "P_Vid_SyncedOsc.hpp"
 #include "P_Rwalk_SineFMFlange.hpp"
 
 //Maybe Later: (Unused or incomplet)

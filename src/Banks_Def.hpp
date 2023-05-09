@@ -46,16 +46,16 @@
 }
 
 #define BANKS_DEF_4 { \
-  { "Perlin", 1.0 }, \
-  { "PerlinFreqMod", 1.0 }, \
-  { "PerlinSimple", 1.0 }, \
+  { "VidSimpleLFO", 1.0 }, \
+  { "VidVerticalRamp", 1.0 }, \
+  { "VidSyncedOsc", 1.0 }, \
+  { "VidSimplePerlin", 1.0 }, \
+  { "VidPerlin", 1.0 }, \
+  { "VidPerlinFreqMod", 1.0 }, \
   { "Rwalk_SineFM", 1.0 }, \
   { "Rwalk_SineFMFlange", 1.0 }, \
   { "VarWave", 1.0 }, \
-  { "arrayOnTheRocks", 1.0 }, \
-  { "TestPlugin", 1.0 }, \
-  { "TestPlugin", 1.0 }, \
-  { "TestPlugin", 1.0 } \
+  { "arrayOnTheRocks", 1.0 } \
 }
 
 
